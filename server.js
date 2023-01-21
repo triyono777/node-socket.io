@@ -16,5 +16,22 @@ io.on('connection', (socket) => {
   console.log('Client connected');
   socket.on('disconnect', () => console.log('Client disconnected'));
 });
+io.on('connection', (client) =>{
+    console.log('connection from android');  
+  
+    client.on('dokumenBaruAndroid', (data) =>{
+      client.emit('dokumenBaru', "dokumen baru tersedia");
+    });
+  
+      client.on('admin1ApproveAndroid', (data) =>{
+      client.emit('admin1Approve', "admin1 telah approve dokumen");
+    });
+  
+    client.on('hasilApproveAndroid', (data) =>{
+      client.emit('hasilApprove', data);
+    });
+  
+  });
+
 
 setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
